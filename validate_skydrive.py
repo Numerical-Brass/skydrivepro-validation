@@ -40,6 +40,8 @@ if (os.path.exists(input_path)):
                 error_file_space_end.append('%s/%s' % (dirName, fname))
             if fname.startswith(' '):
                 error_file_space_start.append('%s/%s' % (dirName, fname))
+            if len('%s/%s' % (dirName, fname)) >= 442:
+                error_path_long.append('%s/%s' % (dirName, fname))
 
     print "FOLDERS with banned names\n"
     print_list(error_folders_names)
@@ -65,6 +67,10 @@ if (os.path.exists(input_path)):
     print_list(error_file_period)
     print "\n Total:",len(error_file_period)
     print "==============================================================================================================\n"
-    print "\n Total errors:",len(error_folders_names)+len(error_file_names)+len(error_file_chars)+len(error_file_space_start)+len(error_file_space_end)+len(error_file_period)
+    print "FILES paths not fewer than 442 characters\n"
+    print_list(error_path_long)
+    print "\n Total:",len(error_path_long)
+    print "==============================================================================================================\n"
+    print "\n Total errors:",len(error_folders_names)+len(error_file_names)+len(error_file_chars)+len(error_file_space_start)+len(error_file_space_end)+len(error_file_period)+len(error_path_long)
 else:
     print "Path '%s' does not exists." % input_path
